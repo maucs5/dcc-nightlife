@@ -1,0 +1,9 @@
+.result {
+  margin-top: 20px
+}
+
+.result img {
+  max-height: 200px;
+  max-width: 200px;
+  border-radius: 25%;
+}

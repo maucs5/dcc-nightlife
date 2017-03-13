@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  form(action='/search', method='get', class='form-inline row')
+    label(class='sr-only', for='input') Name
+    input(type='text', name='q', id='input', class='form-control mr-2 col-9', placeholder='Where you going?')
+    button(type='submit', class='btn btn-outline-primary mr-2') Search
+    if auth
+      a(id="logout", href="/logout", class='btn btn-outline-warning') Log Out
+    else
+      a(id="login", href="/auth/github" class='btn btn-outline-success') Log In
+  if result
+    each d in result
+      div(class='result row')
+        img(src=d.image_url, class='img-fluid col-3')
+        div(class='col-9')
+          p: a(href=d.url)= d.name
+          p Average rating: #{d.rating} out of #{d.review_count} reviews!
+          p Telephone: #{d.phone}
+          if auth
+            p: a(href='#', id=d.id, class='going btn btn-outline-primary') #[span(class='count') #{d.going}] Going
+          else
+            p: a(href='/auth/github', class='btn btn-outline-primary') #{d.going} Going
