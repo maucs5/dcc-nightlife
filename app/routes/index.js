@@ -1,9 +1,8 @@
 'use strict';
 
 var path = process.cwd();
-var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 
-require('dotenv').load() // remove later
+let yelp = require('../config/auth').yelpAuth
 let request = require('request')
 let controller = require('../controllers/locationController')
 
@@ -39,8 +38,8 @@ module.exports = function (app, passport) {
       'https://api.yelp.com/oauth2/token',
       {form: {
 	'grant_type': 'client_credentials',
-	client_id: process.env.YELP_ID,
-	client_secret: process.env.YELP_SECRET
+	client_id: yelp.id,
+	client_secret: yelp.secret
       }},
       f_token
     )
